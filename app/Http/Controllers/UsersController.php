@@ -52,6 +52,7 @@ class UsersController extends Controller
         $count_want = $user->want_items()->count();
         $items = \DB::table('items')->join('item_user','items.id','=','item_user.item_id')->select('items.*')
         ->where('item_user.user_id',$user->id)->distinct()->groupBy('items.id')->paginate(20);
+        $count_have = $user->have_items()->count();
         
         return view('users.show',[
             'user'=>$user,
